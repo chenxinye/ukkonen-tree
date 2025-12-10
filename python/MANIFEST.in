@@ -1,0 +1,4 @@
+include suffixtree_py.h
+include bindings.cpp
+include README.md
+include LICENSE

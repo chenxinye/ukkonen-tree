@@ -1,0 +1,34 @@
+Metadata-Version: 2.4
+Name: pyukkonen
+Version: 0.0.1
+Summary: A high-performance C++ Suffix Tree implementation with Python bindings
+Home-page: https://github.com/chenxinye/ukkonen-tree
+Author: Xinye Chen
+Author-email: xinyechenai@gmail.com
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-python
+Dynamic: summary
+
+# pyukkonen
+
+Running Ukkonen's Suffix Tree algorithm in C++ via Python.
+
+## Installation
+
+```bash
+pip install pyukkonen
+```
+
+## usage
+
+```python
+import pyukkonen
+tree = pyukkonen.SuffixTree("banana")
+tree.print_tree()
+```

@@ -1,0 +1,10 @@
+MANIFEST.in
+README.md
+bindings.cpp
+setup.py
+suffixtree_py.h
+pyukkonen.egg-info/PKG-INFO
+pyukkonen.egg-info/SOURCES.txt
+pyukkonen.egg-info/dependency_links.txt
+pyukkonen.egg-info/not-zip-safe
+pyukkonen.egg-info/top_level.txt
