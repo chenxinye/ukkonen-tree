@@ -1,4 +1,4 @@
-# Ukkonen's algorithm
+# Ukkonen's algorithm in SIMD
 
 
 
