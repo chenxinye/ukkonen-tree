@@ -6,6 +6,20 @@
 #include "suffixtree.h" 
 
 
+
+void runCorrectnessTest() {
+    std::cout << "\n--- Correctness Tests ---" << std::endl;
+    std::string text = "banana";
+    SuffixTree tree(text);
+    
+    std::vector<std::string> patterns = {"ana", "nan", "banana", "xyz"};
+    for (const auto& pat : patterns) {
+        std::cout << "Searching '" << pat << "': " 
+                  << (tree.search(pat) ? "Found" : "Not Found") << std::endl;
+    }
+}
+
+
 // Generates a random DNA string (A, C, G, T) of given length
 std::string generateRandomDNA(int length) {
     const char charset[] = "ACGT";
@@ -56,16 +70,41 @@ void runPerformanceTest(int length) {
     std::cout << "Pattern Found: " << (found ? "Yes" : "No") << std::endl;
 }
 
-void runCorrectnessTest() {
-    std::cout << "\n--- Correctness Tests ---" << std::endl;
-    std::string text = "banana";
+// Generate random ASCII (32-126) to force wider branching factors
+// SIMD benefits most when nodes have MANY children.
+std::string generateRandomText(int length) {
+    std::string result;
+    result.resize(length);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(33, 126); // Readable ASCII
+
+    for (int i = 0; i < length; ++i) {
+        result[i] = (char)dis(gen);
+    }
+    return result;
+}
+
+
+
+void simd_comparison() {
+    int len = 500000; // 500k characters
+    std::cout << "\n--- SIMD Test (Length: " << len << ") ---\n" << std::endl;
+    std::cout << "Generating " << len << " random characters..." << std::endl;
+    std::string text = generateRandomText(len);
+
+    std::cout << "Building Suffix Tree with NEON Optimizations..." << std::endl;
+
+    auto start = std::chrono::high_resolution_clock::now();
+    
     SuffixTree tree(text);
     
-    std::vector<std::string> patterns = {"ana", "nan", "banana", "xyz"};
-    for (const auto& pat : patterns) {
-        std::cout << "Searching '" << pat << "': " 
-                  << (tree.search(pat) ? "Found" : "Not Found") << std::endl;
-    }
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> elapsed = end - start;
+
+    std::cout << "Construction Time: " << elapsed.count() << " ms" << std::endl;
+    std::cout << "Nodes: " << tree.getNodeCount() << std::endl;
+    
 }
 
 int main() {
@@ -79,8 +118,10 @@ int main() {
      
     runPerformanceTest(100000); // Medium: 100,000 characters
 
-    // Note: If running in debug mode, this might be slow. Use Release mode (-O3).
+    // Note: If running in debug mode, this might be slow. 
     runPerformanceTest(1000000); // Large: 1,000,000 characters
 
+
+    simd_comparison();
     return 0;
 }
