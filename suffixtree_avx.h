@@ -4,7 +4,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <immintrin.h> // Intel/AMD intrinsics
+#include <immintrin.h> 
+#include <cstdint>
 
 struct Node {
     int start;
