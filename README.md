@@ -1,7 +1,5 @@
 # Ukkonen's algorithm in SIMD
 
-
-
 Ukkonen's algorithm is a linear-time, online algorithm for constructing suffix trees. This project offers a highly optimized, linear-time O(n) implementation of Ukkonen’s Suffix Tree algorithm, featuring a clean C++17 implementation, SIMD-accelerated versions for ARM NEON and x86 AVX2, and Python bindings via pybind11 for seamless high-performance integration in Python.
 
 ### Run for test
