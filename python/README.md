@@ -8,10 +8,17 @@ Running Ukkonen's Suffix Tree algorithm in C++ via Python.
 pip install pyukkonen
 ```
 
-## usage
+## Usage
 
 ```python
 import pyukkonen
 tree = pyukkonen.SuffixTree("banana")
 tree.print_tree()
+```
+
+
+## To build for submit
+
+```python
+python -m build --no-isolation
 ```
